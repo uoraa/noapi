@@ -1,13 +1,14 @@
 'use strict';
 
-
+const _var = require('../../env');
+var db_name = _var.server.db.name;
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var TaskSchema = new Schema({
+var apiSchema = new Schema({
     name: {
         type: String,
-        Required: 'Kindly enter the name of the task'
+        Required: 'name required'
     },
     Created_date: {
         type: Date,
@@ -23,4 +24,4 @@ var TaskSchema = new Schema({
 });
 
 
-module.exports = mongoose.model('Tasks', TaskSchema);
+module.exports = mongoose.model(db_name, apiSchema);

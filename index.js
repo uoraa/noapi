@@ -1,7 +1,9 @@
 const _var = require('./env');
 var colors = require('colors');
+var routes = require('./api/routes/routes');
 const splash = _var.splash;
 const server = _var.server;
+const connect = _var.server.db.connect;
 var init = splash.messageConsole;
 
 var express = require('express'),
@@ -12,14 +14,11 @@ var express = require('express'),
     bodyParser = require('body-parser');
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://127.0.0.1:27017/Tododb');
-
+mongoose.connect(connect);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-
-var routes = require('./api/routes/routes');
 routes(app);
 
 app.use(function (req, res) {

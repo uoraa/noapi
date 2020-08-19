@@ -1,18 +1,20 @@
 'use strict';
 var console = require('../../env/console');
+const _var = require('../../env');
+var db_name = _var.server.db.name;
 var mongoose = require('mongoose'),
-    Task = mongoose.model('Tasks');
+    api = mongoose.model(db_name);
 
 function terminal(message, _function) {
     console.message("CONTROLLER | " + _function, message);
 }
 
 exports.noapi = function (message) {
-    terminal(message, "noapi");
+    terminal(message, db_name);
 };
 
-exports.list_all_tasks = function (req, res) {
-    Task.find({}, function (err, task) {
+exports.list = function (req, res) {
+    api.find({}, function (err, task) {
         var message;
         if (err) {
             res.send(err);
@@ -21,13 +23,13 @@ exports.list_all_tasks = function (req, res) {
             res.json(task);
             message = task;
         }
-        terminal(message, "list_all_tasks");
+        terminal(message, "list_all");
     });
 };
 
 
-exports.create_a_task = function (req, res) {
-    var new_task = new Task(req.body);
+exports.create = function (req, res) {
+    var new_task = new api(req.body);
     new_task.save(function (err, task) {
         if (err)
             res.send(err);
@@ -35,29 +37,29 @@ exports.create_a_task = function (req, res) {
     });
 };
 
-exports.read_a_task = function (req, res) {
-    Task.findById(req.params.taskId, function (err, task) {
+exports.read = function (req, res) {
+    api.findById(req.params.id, function (err, task) {
         if (err)
             res.send(err);
         res.json(task);
     });
 };
 
-exports.update_a_task = function (req, res) {
-    Task.findOneAndUpdate({ _id: req.params.taskId }, req.body, { new: true }, function (err, task) {
+exports.update = function (req, res) {
+    api.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }, function (err, task) {
         if (err)
             res.send(err);
         res.json(task);
     });
 };
-// Task.remove({}).exec(function(){});
-exports.delete_a_task = function (req, res) {
-
-    Task.remove({
-        _id: req.params.taskId
+// api.remove({}).exec(function(){});
+exports.delete = function (req, res) {
+// todo: 'remove' is deprecated
+    api.remove({
+        _id: req.params.id
     }, function (err, task) {
         if (err)
             res.send(err);
-        res.json({ message: 'Task successfully deleted' });
+        res.json({ message: 'Successfully deleted' });
     });
 };

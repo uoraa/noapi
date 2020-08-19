@@ -2,25 +2,27 @@
 'use strict';
 
 module.exports = function (app) {
-    var todoList = require('../controllers/controller');
+    var nodeApi = require('../controllers/controller');
     var console = require('../../env/console');
+    const _var = require('../../env');
+    var api = _var.server.api;
 
-    // todoList Routes
+    // nodeApi Routes
     app.route('/')
         .get(console.root);
 
-    app.route('/tasks')
-        .get(todoList.list_all_tasks)
-        .post(todoList.create_a_task);
+    app.route('/' + api.route)
+        .get(nodeApi.list)
+        .post(nodeApi.create);
 
-    app.route('/tasks/:taskId')
-        .get(todoList.read_a_task)
-        .put(todoList.update_a_task)
-        .delete(todoList.delete_a_task);
+    app.route('/' + api.route +'/:id')
+        .get(nodeApi.read)
+        .put(nodeApi.update)
+        .delete(nodeApi.delete);
 
     app.route('/a')
         .get(function (req, res) {
             res.send("hellooooooooo");
-            todoList.noapi("a")
+            nodeApi.noapi("a")
         });
 };

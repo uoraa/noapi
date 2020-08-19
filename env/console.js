@@ -10,7 +10,7 @@ var init = splash.messageConsole;
 exports.root = function (req, res) {
     var count = Object.keys(req.query).length;
     if (count == 0) {
-        var message = "ROOT"
+        var message = "./"
         console.clear();
         console.log(init);
         console.log(colors.grey(message));
