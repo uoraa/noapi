@@ -2,8 +2,9 @@
 var console = require('../../env/console');
 const _var = require('../../env');
 var db_name = _var.server.db.name;
+var db_collection = _var.server.db.collection;
 var mongoose = require('mongoose'),
-    api = mongoose.model(db_name);
+    api = mongoose.model(db_collection);
 
 function terminal(message, _function) {
     console.message("CONTROLLER | " + _function, message);

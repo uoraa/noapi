@@ -1,7 +1,7 @@
 'use strict';
 
 const _var = require('../../env');
-var db_name = _var.server.db.name;
+var db_collection = _var.server.db.collection;
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
@@ -24,4 +24,4 @@ var apiSchema = new Schema({
 });
 
 
-module.exports = mongoose.model(db_name, apiSchema);
+module.exports = mongoose.model(db_collection, apiSchema);

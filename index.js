@@ -1,10 +1,19 @@
 const _var = require('./env');
 var colors = require('colors');
 var routes = require('./api/routes/routes');
-const splash = _var.splash;
-const server = _var.server;
-const connect = _var.server.db.connect;
-var init = splash.messageConsole;
+var dev = _var.dev;
+
+let splash;
+let server;
+let connect;
+let init;
+
+if (dev = true) {
+    splash = _var.splash;
+    server = _var.server;
+    connect = _var.server.db.connect;
+    init = splash.messageConsole;
+}
 
 var express = require('express'),
     app = express(),
