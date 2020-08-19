@@ -19,7 +19,7 @@ var express = require('express'),
     app = express(),
     port = process.env.PORT || server.port,
     mongoose = require('mongoose'),
-    Task = require('./api/models/model'),
+    api = require('./api/models/model'),
     bodyParser = require('body-parser');
 
 mongoose.Promise = global.Promise;
