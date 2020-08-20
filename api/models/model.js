@@ -6,13 +6,29 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var apiSchema = new Schema({
+    Created_date: {
+        type: Date,
+        default: Date.now
+    },
     name: {
         type: String,
         Required: 'name required'
     },
-    Created_date: {
-        type: Date,
-        default: Date.now
+    details: {
+        type: Object,
+        Required: 'details required'
+    },
+    selections: {
+        type: Array,
+        Required: 'selections required'
+    },
+    count: {
+        type: Number,
+        Required: 'count required'
+    },
+    active: {
+        type: Boolean,
+        Required: 'active required'
     },
     status: {
         type: [{
