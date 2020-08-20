@@ -6,6 +6,8 @@ var db_collection = _var.server.db.collection;
 var mongoose = require('mongoose'),
     api = mongoose.model(db_collection);
 
+mongoose.set('useFindAndModify', false);
+
 function terminal(message, _function) {
     console.message("CONTROLLER | " + _function, message);
 }
@@ -55,8 +57,7 @@ exports.update = function (req, res) {
 };
 // api.remove({}).exec(function(){});
 exports.delete = function (req, res) {
-// todo: 'remove' is deprecated
-    api.remove({
+    api.deleteOne({
         _id: req.params.id
     }, function (err, task) {
         if (err)
